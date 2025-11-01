@@ -1,25 +1,25 @@
 function countSheep(letters: string): number {
-  const VALID_CHARS = ['s', 'h', 'e', 'p']
-  const initialCount = {
-    s: 0,
-    h: 0,
-    e: 0,
-    p: 0
-  }
+  const validChars = new Map([...'sheep'].map(char => [char, 0]))
 
   const countedChars = [...letters].reduce((acc, char) => {
-    if (!VALID_CHARS.includes(char)) {
+    if (!validChars.has(char)) {
       return acc
     }
 
-    acc[char as keyof typeof acc]++
+    acc.set(char, (acc.get(char) ?? 0) + 1)
 
     return acc
-  }, initialCount)
+  }, validChars)
 
-  countedChars.e /= 2
+  console.log({countedChars})
 
-  return Math.floor(Math.min(...Object.values(countedChars)))
+  const validCount = countedChars.entries().map(
+    ([char, count]) => Math.floor(char === 'e' ? count / 2 : count)
+  )
+
+  return Math.min(
+    ...validCount
+  )
 }
 
 console.log(
