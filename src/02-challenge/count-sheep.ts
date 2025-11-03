@@ -1,30 +1,27 @@
 function countSheep(letters: string): number {
-  const validChars = new Map([...'sheep'].map(char => [char, 0]))
+  const validChars = new Set('sheep')
 
-  const countedChars = [...letters].reduce((acc, char) => {
-    if (!validChars.has(char)) {
-      return acc
-    }
+  const countedChars = [...letters]
+    .filter(char => validChars.has(char))
+    .reduce(
+      (acc, char) => {
+        acc[char] ??= 0
+        acc[char]++
 
-    acc.set(char, (acc.get(char) ?? 0) + 1)
+        return acc
+      },
+      {} as Record<string, number>
+    )
 
-    return acc
-  }, validChars)
-
-  console.log({countedChars})
-
-  const validCount = countedChars.entries().map(
+  const populatedMissingChars = Object.assign(
+    { s: 0, h: 0, e: 0, p: 0 },
+    countedChars
+  )
+  const validCount = Object.entries(populatedMissingChars).map(
     ([char, count]) => Math.floor(char === 'e' ? count / 2 : count)
   )
 
-  return Math.min(
-    ...validCount
-  )
+  return Math.min(...validCount)
 }
 
-console.log(
-  countSheep('sheepxsheepy'),
-  countSheep('hola'),
-  Math.min(...[]),
-  Object.values({} as Record<string, number>) ?? 0
-)
+console.log(countSheep('sheepxsheepy'), countSheep('hola'))
