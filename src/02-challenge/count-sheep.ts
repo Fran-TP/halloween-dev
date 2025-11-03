@@ -13,15 +13,12 @@ function countSheep(letters: string): number {
       {} as Record<string, number>
     )
 
-  const populatedMissingChars = Object.assign(
-    { s: 0, h: 0, e: 0, p: 0 },
-    countedChars
-  )
-  const validCount = Object.entries(populatedMissingChars).map(
+  const populatedMissingChars = { s: 0, h: 0, e: 0, p: 0, ...countedChars }
+  const normalizeCount = Object.entries(populatedMissingChars).map(
     ([char, count]) => Math.floor(char === 'e' ? count / 2 : count)
   )
 
-  return Math.min(...validCount)
+  return Math.min(...normalizeCount)
 }
 
 console.log(countSheep('sheepxsheepy'), countSheep('hola'))
