@@ -1,4 +1,4 @@
-# halloween-dev — Solutions Only
+# halloween-dev — Solutions
 
 Prerequisites
 - Bun (recommended): https://bun.sh
