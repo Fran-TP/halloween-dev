@@ -1,4 +1,4 @@
-function countSheep(letters: string): number {
+export default function countSheep(letters: string): number {
   const validChars = new Set('sheep')
 
   const countedChars = [...letters]
