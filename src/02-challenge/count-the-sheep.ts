@@ -20,5 +20,3 @@ export default function countSheep(letters: string): number {
 
   return Math.min(...normalizeCount)
 }
-
-console.log(countSheep('sheepxsheepy'), countSheep('hola'))
